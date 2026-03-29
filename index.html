@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DRIP SWAG 7 - Camisetas Incríveis</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <svg class="logo-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Background -->
+                    <rect width="100" height="100" fill="none" stroke="#0d99ff" stroke-width="3" rx="12"/>
+                    
+                    <!-- Shirt outline -->
+                    <g fill="none" stroke="#0d99ff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <!-- Left shoulder -->
+                        <path d="M 35 25 L 25 35"/>
+                        <!-- Right shoulder -->
+                        <path d="M 65 25 L 75 35"/>
+                        <!-- Left sleeve -->
+                        <path d="M 25 35 L 15 45"/>
+                        <!-- Right sleeve -->
+                        <path d="M 75 35 L 85 45"/>
+                        <!-- Main body -->
+                        <path d="M 50 22 L 35 25 L 25 35 L 15 45 L 20 75 L 80 75 L 85 45 L 75 35 L 65 25 Z"/>
+                        <!-- Vertical center line -->
+                        <path d="M 50 22 L 50 75"/>
+                    </g>
+                    
+                    <!-- Shine effect -->
+                    <rect x="35" y="30" width="8" height="20" fill="#0d99ff" opacity="0.3" rx="4"/>
+                </svg>
+                <div>
+                    <h1>DRIP SWAG 7</h1>
+                    <p class="tagline">Estilo que combina com você</p>
+                </div>
+            </div>
+
+            <!-- Nav de Clubes -->
+            <nav class="clubs-nav">
+                <div class="nav-section">
+                    <p class="nav-label">🇧🇷 BRASILEIROS</p>
+                    <div class="nav-links">
+                        <button class="nav-link" onclick="filterByClub('flamengo')">Flamengo</button>
+                        <button class="nav-link" onclick="filterByClub('botafogo')">Botafogo</button>
+                        <button class="nav-link" onclick="filterByClub('vasco')">Vasco</button>
+                        <button class="nav-link" onclick="filterByClub('fluminense')">Fluminense</button>
+                        <button class="nav-link" onclick="filterByClub('sao-paulo')">São Paulo</button>
+                        <button class="nav-link" onclick="filterByClub('palmeiras')">Palmeiras</button>
+                        <button class="nav-link" onclick="filterByClub('corinthians')">Corinthians</button>
+                        <button class="nav-link" onclick="filterByClub('santos')">Santos</button>
+                        <button class="nav-link" onclick="filterByClub('gremio')">Grêmio</button>
+                        <button class="nav-link" onclick="filterByClub('internacional')">Internacional</button>
+                    </div>
+                </div>
+
+                <div class="nav-section">
+                    <p class="nav-label">🇪🇺 EUROPEUS</p>
+                    <div class="nav-links">
+                        <button class="nav-link" onclick="filterByClub('manchester-united')">Man United</button>
+                        <button class="nav-link" onclick="filterByClub('liverpool')">Liverpool</button>
+                        <button class="nav-link" onclick="filterByClub('barcelona')">Barcelona</button>
+                        <button class="nav-link" onclick="filterByClub('real-madrid')">Real Madrid</button>
+                        <button class="nav-link" onclick="filterByClub('bayern')">Bayern</button>
+                        <button class="nav-link" onclick="filterByClub('psg')">PSG</button>
+                        <button class="nav-link" onclick="filterByClub('chelsea')">Chelsea</button>
+                        <button class="nav-link" onclick="filterByClub('milan')">Milan</button>
+                    </div>
+                </div>
+
+                <div class="nav-section">
+                    <p class="nav-label">🏆 SELEÇÕES</p>
+                    <div class="nav-links">
+                        <button class="nav-link" onclick="filterByClub('brasil-sel')">Brasil</button>
+                        <button class="nav-link" onclick="filterByClub('argentina')">Argentina</button>
+                        <button class="nav-link" onclick="filterByClub('franca')">França</button>
+                        <button class="nav-link" onclick="filterByClub('alemanha')">Alemanha</button>
+                        <button class="nav-link" onclick="filterByClub('espanha')">Espanha</button>
+                        <button class="nav-link" onclick="filterByClub('portugal')">Portugal</button>
+                    </div>
+                </div>
+            </nav>
+
+            <div class="header-right">
+                <div class="search-box">
+                    <input type="text" placeholder="Buscar camiseta..." id="search-input">
+                    <span class="search-icon">🔍</span>
+                </div>
+                <div class="cart-trigger" onclick="toggleCart()">
+                    <div class="cart-icon">🛒</div>
+                    <span class="cart-badge" id="cart-count">0</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Tabs de Categorias -->
+        <div class="tabs-container">
+            <div class="tabs">
+                <button class="tab-btn active" data-category="brasileiros" onclick="switchCategory('brasileiros')">
+                    <span class="tab-icon">🇧🇷</span>
+                    <span class="tab-label">Clubes Brasileiros</span>
+                </button>
+                <button class="tab-btn" data-category="europeus" onclick="switchCategory('europeus')">
+                    <span class="tab-icon">🇪🇺</span>
+                    <span class="tab-label">Clubes Europeus</span>
+                </button>
+                <button class="tab-btn" data-category="selecoes" onclick="switchCategory('selecoes')">
+                    <span class="tab-icon">🏆</span>
+                    <span class="tab-label">Seleções</span>
+                </button>
+            </div>
+            <div class="tab-indicator"></div>
+        </div>
+
+        <!-- Grid de Produtos -->
+        <div class="products-container">
+            <div class="products-grid" id="products-grid"></div>
+        </div>
+    </main>
+
+    <!-- Cart Modal -->
+    <div class="cart-modal" id="cart-modal">
+        <div class="cart-overlay" onclick="toggleCart()"></div>
+        <div class="cart-panel">
+            <div class="cart-header">
+                <h2>Seu Carrinho</h2>
+                <button class="close-btn" onclick="toggleCart()">✕</button>
+            </div>
+            <div class="cart-items" id="cart-items"></div>
+            <div class="cart-footer">
+                <div class="cart-summary">
+                    <div class="summary-row">
+                        <span>Subtotal:</span>
+                        <span id="subtotal">R$ 0,00</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Frete:</span>
+                        <span id="shipping">Grátis</span>
+                    </div>
+                    <div class="summary-row total">
+                        <span>Total:</span>
+                        <span id="total-price">R$ 0,00</span>
+                    </div>
+                </div>
+                <button class="checkout-btn" onclick="checkout()">Finalizar Compra</button>
+                <button class="continue-shopping-btn" onclick="toggleCart()">Continuar Comprando</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Toast -->
+    <div class="toast" id="toast"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
